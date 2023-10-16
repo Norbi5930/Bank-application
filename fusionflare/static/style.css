@@ -1,0 +1,176 @@
+body {
+    background-color: lightblue;
+}
+
+
+
+.login-rect, .register-rect {
+    border: 6px solid black;
+    background: rgba(31, 30, 27, 0.5);
+    width: 800px;
+    height: 600px;
+    transform: translateX(calc(50% + 150px)) translateY(calc(20%));
+    border-radius: 10px;
+}
+
+
+.login-title {
+    font-style: italic;
+    font-size: 32px;
+    color: black;
+    text-align: center;
+}
+
+
+.login-username {
+    position: absolute;
+    width: 500px;
+    left: 15%;
+    top: 15%;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+
+.login-card-number {
+    position: absolute;
+    width: 500px;
+    left: 15%;
+    top: 35%;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+
+.login-password {
+    position: absolute;
+    width: 500px;
+    left: 15%;
+    top: 55%;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+
+.login-button {
+    position: absolute;
+    left: calc(50% - 100px);
+    top: 75%;
+    font-size: 24px;
+    border-radius: 8px;
+}
+
+
+.login-button:hover {
+    background-color: gray;
+}
+
+.login-button:active {
+    margin-top: 2px;
+}
+
+
+
+.error-code {
+    color: red;
+    position: relative;
+    transform: translateY(280px) translateX(220px);
+    font-size: 16px;
+}
+
+
+
+.register-title {
+    font-style: italic;
+    font-size: 32px;
+    color: #00a6ff;
+    text-align: center;
+}
+
+
+.register-username {
+    position: absolute;
+    width: 300px;
+    left: 10%;
+    top: 15%;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+
+.register-email {
+    position: absolute;
+    width: 300px;
+    right: 10%;
+    top: 15%;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+
+.register-phone {
+    position: absolute;
+    width: 300px;
+    left: 10%;
+    top: 30%;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+
+.register-birth-label {
+    position: absolute;
+    right: 10%;
+    top: 25%;
+    font-size: 20px;
+    color: white;
+}
+
+
+.register-birth {
+    position: absolute;
+    width: 300px;
+    right: 10%;
+    top: 30%;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+
+.register-password {
+    position: absolute;
+    width: 300px;
+    top: 45%;
+    left: 10%;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+
+.register-password-confirm {
+    position: absolute;
+    width: 300px;
+    right: 10%;
+    top: 45%;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+
+.register-button {
+    position: absolute;
+    width: 150px;
+    left: calc(50% - 70px);
+    top: 70%;
+    font-size: 22px;
+    border-radius: 10px;
+}
+
+.register-button:hover {
+    background-color: gray;
+}
+
+
+.register-button:active {
+    margin-top: 2px;
+}

@@ -1,0 +1,35 @@
+<body style="background-color: #07aaf5;">
+    
+
+    {% extends "index.html" %}
+
+
+
+    {% block content %}
+
+        <form class="login-rect" action="" method="post">
+            {{ form.hidden_tag() }}
+            <h2 class="login-title">Bejelentkezés</h2>
+            <fieldset>
+                <div>
+                    {{ form.username(class="login-username") }}
+                </div>
+                <div>
+                    {{ form.card_number(class="login-card-number") }}
+                </div>
+                <div>
+                    {{ form.password(class="login-password") }}
+                </div>
+
+
+            </fieldset>
+
+            <div>
+                {{ form.submit(class="login-button") }}
+            </div>
+
+        </form>
+
+    {% endblock content %}
+
+</body>

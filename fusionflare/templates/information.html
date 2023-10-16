@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+
+
+{% block content %}
+    <p>{{ current_user.username}}</p>
+    <p>{{ current_user.card_number}}</p>
+    <p>{{ current_user.balance}}$</p>
+    <p>{{ current_user.cvc_code}}</p>
+
+
+
+{% endblock content %}

@@ -1,0 +1,91 @@
+<body style="background-color: darkblue;">
+    
+
+    {% extends "index.html" %}
+
+
+    {% block content %}
+
+        <form class="register-rect" action="" method="post">
+            {{ form.hidden_tag() }}
+            <h2 class="register-title">Regisztráció</h2>
+            <div>
+                    {% if form.username.errors %}
+                        {{ form.username(class="register-username is-invalid") }}
+
+                        <div class="error-code">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="register-username") }}
+                    {% endif %}
+            </div>
+            <div>
+                    {% if form.email.errors %}
+                        {{ form.email(class="register-email is-invalid") }}
+
+                        <div class="error-code">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="register-email") }}
+                    {% endif %}
+            </div>
+            <div>
+                    {{ form.phone_number(class="register-phone") }}
+            </div>
+            <div>
+                    {{ form.birth_data.label(class="register-birth-label")}}
+            </div>
+            <div>
+                    {% if form.birth_data.errors %}
+                        {{ form.birth_data(class="register-birth is-invalid") }}
+
+                        <div class="error-code">
+                            {% for error in form.birth_data.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.birth_data(class="register-birth") }}
+                    {% endif %}
+            </div>
+            <div>
+                {% if form.password.errors %}
+                    {{ form.password(class="register-password is-invalid") }}
+
+                    <div class="error-code">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(class="register-password") }}
+                {% endif %}
+            </div>
+            <div>
+                {% if form.password_confirm.errors %}
+                    {{ form.password_confirm(class="register-password-confirm is-invalid") }}
+
+                    <div class="error-code">
+                        {% for error in form.password_confirm.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password_confirm(class="register-password-confirm") }}
+                {% endif %}
+            </div>
+            <div>
+                {{ form.submit(class="register-button") }}
+            </div>
+        </form>
+
+</body>
+
+
+{% endblock content %}
