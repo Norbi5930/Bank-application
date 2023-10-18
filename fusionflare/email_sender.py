@@ -20,9 +20,9 @@ class SuccesRegister:
             msg = Message("Sikeres regisztráció!", sender="FusionFlare@gmail.com", recipients=[self.email])
             msg.body = f"Üdv, {self.username}! \n Ön sikeresen regisztrált az oldalunkon! \n A kártyaszáma: {self.card_number}"
             mail.send(msg)
-            return True
-        except Exception:
-            return False
+            return 
+        except Exception as error:
+            return error
         
 
 class NewLogin:

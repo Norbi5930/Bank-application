@@ -26,17 +26,19 @@ def home():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        card_number = generate_card_number()
-        cvc_code = generate_cvc_code()
-        user = User(username=form.username.data, card_number=card_number, balance=0, cvc_code=cvc_code, email=form.email.data, birth_day=form.birth_data.data, phone_number=form.phone_number.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        login_user(user)
-        if SuccesRegister(form.username.data, card_number, form.email.data).send_email():
+        try:
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
+            card_number = generate_card_number()
+            cvc_code = generate_cvc_code()
+            user = User(username=form.username.data, card_number=card_number, balance=0, cvc_code=cvc_code, email=form.email.data, birth_day=form.birth_data.data, phone_number=form.phone_number.data, password=hashed_password)
+            db.session.add(user)
+            db.session.commit()
+            login_user(user)
+            SuccesRegister(form.username.data, card_number, form.email.data).send_email()
             flash("Sikeres regisztráció!", "succes")
-        else:
-            flash("Sikertelen regisztráció!")
+        except:
+            flash("Sikertelen regisztráció, próbáld újra később.", "danger")
+        
         return redirect(url_for("home"))
 
     return render_template("register.html", title="Regisztráció", form=form)
