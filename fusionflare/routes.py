@@ -1,6 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, current_user, logout_user, login_required
 from random import randint
+from wtforms.validators import ValidationError
 
 from fusionflare import app, db, bcrypt
 from fusionflare.forms import RegisterForm, LoginForm
@@ -12,6 +13,8 @@ from fusionflare.email_sender import SuccesRegister, NewLogin
 
 with app.app_context():
     db.create_all()
+    #user = User(username="Barta Norbert", card_number="123456789", balance=100, cvc_code="123", email="bnorbert0925@gmail.com", birth_day="2009-01-26", phone_number="380123456", password=bcrypt.generate_password_hash("Csipsz123"))
+    #db.session.add(user)
     db.session.commit()
 
 
@@ -25,6 +28,8 @@ def home():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
     if form.validate_on_submit():
         try:
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
@@ -34,11 +39,11 @@ def register():
             db.session.add(user)
             db.session.commit()
             login_user(user)
-            SuccesRegister(form.username.data, card_number, form.email.data).send_email()
+            #SuccesRegister(form.username.data, card_number, form.email.data).send_email()
             flash("Sikeres regisztráció!", "succes")
         except:
             flash("Sikertelen regisztráció, próbáld újra később.", "danger")
-        
+
         return redirect(url_for("home"))
 
     return render_template("register.html", title="Regisztráció", form=form)
@@ -77,7 +82,7 @@ def login():
             login_user(user)
             next_page = request.args.get("next")
             flash("Sikeres bejelentkezés!", "succes")
-            NewLogin(current_user.username, current_user.email).send_email()
+            #NewLogin(current_user.username, current_user.email).send_email()
             return redirect(next_page) if next_page else redirect(url_for("home"))
         else:
             flash("Sikertelen bejelentkezés, ellenőrizze a felhasználónevet vagy a jelszót!", "danger")
@@ -90,6 +95,10 @@ def login():
 def information():
     return render_template("information.html", title="Információk")
 
+
+@app.route("/privacy", methods=["GET"])
+def privacy():
+    return render_template("privacy.html", title="Privacy")
 
 @app.route("/logout")
 @login_required

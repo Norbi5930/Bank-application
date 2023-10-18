@@ -74,7 +74,7 @@ body {
 .error-code {
     color: red;
     position: relative;
-    transform: translateY(280px) translateX(220px);
+    transform: translateY(300px) translateX(220px);
     font-size: 16px;
 }
 
@@ -157,6 +157,28 @@ body {
 }
 
 
+.register-privacy {
+    position: absolute;
+    border-radius: 2px;
+    left: 10%;
+    top: 55%;
+}
+
+.register-privacy-label {
+    position: absolute;
+    left: calc(15% - 15px);
+    top: calc(55% - 5px);
+    color: white;
+    user-select: none;
+}
+
+.register-privacy-label-link {
+    position: absolute;
+    left: 25%;
+    top: calc(55% - 5px);
+    color: white;
+}
+
 .register-button {
     position: absolute;
     width: 150px;
@@ -173,4 +195,10 @@ body {
 
 .register-button:active {
     margin-top: 2px;
+}
+
+
+.privacy-title {
+    font-size: 32px;
+    text-align: center;
 }

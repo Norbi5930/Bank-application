@@ -17,6 +17,7 @@ class RegisterForm(FlaskForm):
     birth_data = DateField("Születési dátum", validators=[InputRequired()])
     password = PasswordField(validators=[InputRequired(), Length(8)], render_kw={"placeholder": "Jelszó"})
     password_confirm = PasswordField(validators=[InputRequired(), EqualTo("password", message="A két jelszó nem eggyezik!")], render_kw={"placeholder": "Jelszó újra"})
+    accept_privacy = BooleanField()
     submit = SubmitField("Regisztráció")
 
 
@@ -39,8 +40,12 @@ class RegisterForm(FlaskForm):
             raise ValidationError(message="Túl fiatal vagy ahhoz, hogy fiókod legyen!")
         if now_year - birth_data.data.year > 99:
             raise ValidationError(message="Érvényes dátumot adj meg!")
-        
-
+    
+    def validate_accept_privacy(self, accept_privacy):
+        if accept_privacy.data:
+            pass
+        else:
+            raise ValidationError(message="Nem fogadtad el a felhasználási feltételeket!")
 
 
 class LoginForm(FlaskForm):
