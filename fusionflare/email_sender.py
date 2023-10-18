@@ -21,6 +21,20 @@ class SuccesRegister:
             msg.body = f"Üdv, {self.username}! \n Ön sikeresen regisztrált az oldalunkon! \n A kártyaszáma: {self.card_number}"
             mail.send(msg)
             return True
-        except Exception as error:
+        except Exception:
             return False
         
+
+class NewLogin:
+    def __init__(self, username, send_email):
+        self.username = username
+        self.email = send_email
+    
+    def send_email(self):
+        try:
+            msg = Message("Új bejelentkező!", sender="FusionFlare@gmail.com", recipients=[self.email])
+            msg.body = f"Kedves {self.username}! \n Egy új bejelentkezést észleltünk a fiókjában, ha nem ön volt az, ajánljuk, hogy változtassa meg a jelszavát! \n Ha viszont ön volt az akkor hagyja figyelmen kívül ezt az üzenetet!"
+            mail.send(msg)
+            return
+        except Exception as error:
+            return error

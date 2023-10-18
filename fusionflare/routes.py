@@ -5,7 +5,7 @@ from random import randint
 from fusionflare import app, db, bcrypt
 from fusionflare.forms import RegisterForm, LoginForm
 from fusionflare.models import User
-from fusionflare.email_sender import SuccesRegister
+from fusionflare.email_sender import SuccesRegister, NewLogin
 
 
 
@@ -75,6 +75,7 @@ def login():
             login_user(user)
             next_page = request.args.get("next")
             flash("Sikeres bejelentkezés!", "succes")
+            NewLogin(current_user.username, current_user.email).send_email()
             return redirect(next_page) if next_page else redirect(url_for("home"))
         else:
             flash("Sikertelen bejelentkezés, ellenőrizze a felhasználónevet vagy a jelszót!", "danger")
