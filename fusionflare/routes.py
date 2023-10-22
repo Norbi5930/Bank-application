@@ -38,7 +38,7 @@ def register():
             db.session.add(user)
             db.session.commit()
             login_user(user)
-            #SuccesRegister(form.username.data, card_number, form.email.data).send_email()
+            SuccesRegister(form.username.data, card_number, form.email.data).send_email()
             flash("Sikeres regisztráció!", "succes")
         except:
             flash("Sikertelen regisztráció, próbáld újra később.", "danger")
@@ -81,7 +81,7 @@ def login():
             login_user(user)
             next_page = request.args.get("next")
             flash("Sikeres bejelentkezés!", "succes")
-            #NewLogin(current_user.username, current_user.email).send_email()
+            NewLogin(current_user.username, current_user.email).send_email()
             return redirect(next_page) if next_page else redirect(url_for("home"))
         else:
             flash("Sikertelen bejelentkezés, ellenőrizze a felhasználónevet vagy a jelszót!", "danger")
