@@ -1,10 +1,9 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, current_user, logout_user, login_required
 from random import randint
-from wtforms.validators import ValidationError
 
 from fusionflare import app, db, bcrypt
-from fusionflare.forms import RegisterForm, LoginForm
+from fusionflare.forms import RegisterForm, LoginForm, SecurityForm
 from fusionflare.models import User
 from fusionflare.email_sender import SuccesRegister, NewLogin
 
@@ -90,10 +89,27 @@ def login():
     return render_template("login.html", title="Bejelentkezés", form=form)
 
 
-
 @app.route("/information", methods=["GET", "POST"])
 def information():
-    return render_template("information.html", title="Információk")
+    if request.method == "POST":
+        if security():
+            return render_template("information.html", title="Információk")
+        else:
+            logout_user()
+            flash("Mivel nem tudtad magad igazolni, ezért kizartunk a rendszerből!", "danger")
+            return redirect(url_for("home"))
+    else:
+        form = SecurityForm()
+        return render_template("security.html", form=form, title = "Ellenőrzés")
+
+def security():
+    form = SecurityForm()
+    if form.validate_on_submit():
+        if bcrypt.check_password_hash(current_user.password, form.password.data):
+            return True
+        
+    return False
+
 
 
 @app.route("/privacy", methods=["GET"])

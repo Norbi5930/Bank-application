@@ -54,3 +54,8 @@ class LoginForm(FlaskForm):
     password = PasswordField(validators=[InputRequired()], render_kw={"placeholder": "Jelszó"})
     submit = SubmitField("Bejelentkezés")
 
+
+
+class SecurityForm(FlaskForm):
+    password = PasswordField(validators=[InputRequired()], render_kw={"placeholder": "Jelszó"})
+    submit = SubmitField("Belépés")

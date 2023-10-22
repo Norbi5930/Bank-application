@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+
+
+{% block content %}
+    <h3 class="security-title">Kérlek igazold magad!</h3>
+    <form class="security-form" action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="security-background">
+            <div class="security-password-background">
+                {{ form.password(class="security-password") }}
+            </div>
+            <div class="security-submit-background">
+                {{ form.submit(class="security-submit") }}
+            </div>
+        </div>
+    </form>
+
+{% endblock content %}
