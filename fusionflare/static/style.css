@@ -5,12 +5,14 @@ body {
 
 
 .login-rect, .register-rect {
-    border: 6px solid black;
+    border: 3px solid black;
     background: rgba(31, 30, 27, 0.5);
     width: 800px;
     height: 600px;
     transform: translateX(calc(50% + 150px)) translateY(calc(20%));
     border-radius: 10px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 1);
+
 }
 
 
