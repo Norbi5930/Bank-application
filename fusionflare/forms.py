@@ -50,7 +50,7 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired()], render_kw={"placeholder": "Felhasználónév"})
-    card_number = IntegerField(validators=[InputRequired()], render_kw={"placeholder": "Kártyaszám"})
+    card_number = StringField(validators=[InputRequired()], render_kw={"placeholder": "Kártyaszám"})
     password = PasswordField(validators=[InputRequired()], render_kw={"placeholder": "Jelszó"})
     submit = SubmitField("Bejelentkezés")
 

@@ -245,3 +245,51 @@ body {
     font-size: 20px;
     border-radius: 8px;
 }
+
+.information-card {
+    position: absolute;
+    width: calc(50% - 350px);
+    height: calc(50% - 150px);
+    left: calc(50% - 300px);
+    top: calc(50% - 200px);
+    background-color: #4a34ba;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+
+.information-bankname {
+    position: absolute;
+    font-size: 34px;
+    color: white;
+    right: 5%;
+    top: 5%;
+    user-select: none;
+}
+
+.information-name {
+    position: absolute;
+    font-size: 26px;
+    color: white;
+    left: 5%;
+    top: 80%;
+    user-select: none;
+}
+
+.information-card-id {
+    position: absolute;
+    font-size: 44px;
+    color: white;
+    left: 25%;
+    top: 50%;
+    user-select: none;
+}
+
+.information-cvc-code {
+    position: absolute;
+    font-size: 24px;
+    color: white;
+    right: 10%;
+    top: 80%;
+    user-select: none;
+}

@@ -12,8 +12,6 @@ from fusionflare.email_sender import SuccesRegister, NewLogin
 
 with app.app_context():
     db.create_all()
-    #user = User(username="Barta Norbert", card_number="123456789", balance=100, cvc_code="123", email="bnorbert0925@gmail.com", birth_day="2009-01-26", phone_number="380123456", password=bcrypt.generate_password_hash("Csipsz123"))
-    #db.session.add(user)
     db.session.commit()
 
 
@@ -75,7 +73,8 @@ def login():
         return redirect(url_for("home"))
 
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data, card_number=form.card_number.data).first()
+        cleaned_card_number = form.card_number.data.replace("-", "")
+        user = User.query.filter_by(username=form.username.data, card_number=cleaned_card_number).first()
 
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
@@ -84,19 +83,29 @@ def login():
             NewLogin(current_user.username, current_user.email).send_email()
             return redirect(next_page) if next_page else redirect(url_for("home"))
         else:
-            flash("Sikertelen bejelentkezés, ellenőrizze a felhasználónevet vagy a jelszót!", "danger")
+            flash("Sikertelen bejelentkezés, ellenőrizze a felhasználónevét, kártyaszámát vagy jelszavát!", "danger")
 
     return render_template("login.html", title="Bejelentkezés", form=form)
 
 
 @app.route("/information", methods=["GET", "POST"])
+@login_required
 def information():
     if request.method == "POST":
         if security():
-            return render_template("information.html", title="Információk")
+            number = 0
+            card_number = ""
+            for numbers in str(current_user.card_number):
+                if number == 4:
+                    card_number += "-"
+                    number = 0
+                number += 1
+                card_number += numbers
+
+            return render_template("information.html", title="Információk", card_number=card_number)
         else:
             logout_user()
-            flash("Mivel nem tudtad magad igazolni, ezért kizartunk a rendszerből!", "danger")
+            flash("Mivel nem tudtad magad igazolni, ezért kizártunk a rendszerből!", "danger")
             return redirect(url_for("home"))
     else:
         form = SecurityForm()

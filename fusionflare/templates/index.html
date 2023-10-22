@@ -40,9 +40,6 @@
           </ul>
           <div class="d-flex">
             {% if current_user.is_authenticated %}
-              <a class="btn btn-outline-secondary" href="">
-                Regisztráció
-              </a>
               <a class="btn btn-secondary ms-3" href="{{ url_for('logout') }}">
                 Kijelentkezés
               </a>

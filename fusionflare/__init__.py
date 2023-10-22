@@ -11,6 +11,8 @@ app.config.from_object("config")
 db.init_app(app)
 
 
-
+login_manager.login_message = "Ezt az oldalt csak bejelentkezett személyek érhetik el!"
+login_manager.login_message_category = "danger"
+login_manager.login_view = "login"
 
 from fusionflare import routes

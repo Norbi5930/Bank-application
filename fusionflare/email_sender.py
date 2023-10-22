@@ -16,9 +16,17 @@ class SuccesRegister:
     
 
     def send_email(self):
+        number = 0
+        card_number = ""
+        for numbers in str(self.card_number):
+            if number == 4:
+                card_number += "-"
+                number = 0
+            number += 1
+            card_number += numbers
         try:
             msg = Message("Sikeres regisztráció!", sender="FusionFlare@gmail.com", recipients=[self.email])
-            msg.body = f"Üdv, {self.username}! \n Ön sikeresen regisztrált az oldalunkon! \n A kártyaszáma: {self.card_number}"
+            msg.body = f"Üdv, {self.username}! \n Ön sikeresen regisztrált az oldalunkon! \n A kártyaszáma: {card_number}"
             mail.send(msg)
             return 
         except Exception as error:

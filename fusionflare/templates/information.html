@@ -1,13 +1,15 @@
-{% extends "index.html" %}
+<body style="background-color: #291a63;">
+    
+    {% extends "index.html" %}
 
 
 
-{% block content %}
-    <p>{{ current_user.username}}</p>
-    <p>{{ current_user.card_number}}</p>
-    <p>{{ current_user.balance}}$</p>
-    <p>{{ current_user.cvc_code}}</p>
-
-
-
-{% endblock content %}
+    {% block content %}
+        <div class="information-card">
+            <p class="information-bankname">FusionFlare</p>
+            <p class="information-name">{{ current_user.username }}</p>
+            <p class="information-card-id">{{ card_number }}</p>
+            <p class="information-cvc-code">{{ current_user.cvc_code }}</p>
+        </div>
+    {% endblock content %}
+</body>
