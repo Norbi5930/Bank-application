@@ -284,7 +284,6 @@ body {
     color: white;
     left: 25%;
     top: 50%;
-    user-select: none;
 }
 
 .information-cvc-code {

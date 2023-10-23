@@ -1,11 +1,11 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, current_user, logout_user, login_required
-from random import randint
+from random import randint, sample
 
 from fusionflare import app, db, bcrypt
-from fusionflare.forms import RegisterForm, LoginForm, SecurityForm
+from fusionflare.forms import RegisterForm, LoginForm, SecurityForm, PasswordChangeForm
 from fusionflare.models import User
-from fusionflare.email_sender import SuccesRegister, NewLogin
+from fusionflare.email_sender import SuccesRegister, NewLogin, PasswordChange
 
 
 
@@ -118,6 +118,55 @@ def security():
             return True
         
     return False
+
+
+
+@app.route("/new_password", methods=["GET", "POST"])
+def new_password_request():
+
+    if request.method == "POST":
+        
+        link = generate_link()
+
+        PasswordChange(current_user.username, current_user.email, f"http://localhost:5000/new_password/{link}/{current_user.user_id}").send_email()
+
+        flash("A szükséges emailt elküldtük!", "succes")
+
+        return redirect(url_for("home"))
+
+
+    return render_template("new_password_request.html", title="Jelszóváltás")
+
+
+def generate_link():
+    
+    character = "qwertzuiopasdfghjklyxcvbnm123456789"
+    size = 16
+
+    link = "".join(sample(character, size))
+
+    return link
+
+
+@app.route(f"/new_password/<link>/<id>", methods=["GET", "POST"])
+def new_password(link,id):
+    form = PasswordChangeForm()
+    user = User.query.get_or_404(id)
+
+    if form.validate_on_submit():
+        if bcrypt.check_password_hash(user.password, form.old_password.data):
+            hashed_password = bcrypt.generate_password_hash(form.new_password.data).decode("utf-8")
+            user.password = hashed_password
+            db.session.commit()
+            logout_user()
+            flash("Sikeres jelszó váltás!", "succes")
+            return redirect(url_for("home"))
+        else:
+            logout_user()
+            flash("Helytelen jelszó! Ki lettél dobva a rendszerből!", "danger")
+            return redirect(url_for("home"))
+
+    return render_template("new_password.html", title="Jelszóváltás", form=form)
 
 
 

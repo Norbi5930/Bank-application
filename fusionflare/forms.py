@@ -59,3 +59,11 @@ class LoginForm(FlaskForm):
 class SecurityForm(FlaskForm):
     password = PasswordField(validators=[InputRequired()], render_kw={"placeholder": "Jelszó"})
     submit = SubmitField("Belépés")
+
+
+
+class PasswordChangeForm(FlaskForm):
+    old_password = StringField(validators=[InputRequired()], render_kw={"placeholder": "Régi jelszó"})
+    new_password = StringField(validators=[InputRequired()], render_kw={"placeholder": "Új jelszó"})
+    new_password_confirm = StringField(validators=[InputRequired(), EqualTo("new_password")], render_kw={"placeholder": "Új jelszó megerősítés"})
+    submit = SubmitField("Mentés")
