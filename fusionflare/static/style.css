@@ -294,3 +294,31 @@ body {
     top: 80%;
     user-select: none;
 }
+
+
+.new-password-form {
+    position: absolute;
+    left: calc(50% - 150px);
+    top: calc(50% - 200px);
+}
+
+.new-password-old, .new-password-new, .new-password-new-confirm {
+    margin-bottom: 50px;
+}
+
+
+.old-password, .new-password, .new-password-confirm {
+    width: 300px;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+.new-submit {
+    width: 200px;
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+.new-password-submit {
+    transform: translateX(50px);
+}
