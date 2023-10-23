@@ -59,7 +59,7 @@ class PasswordChange:
     def send_email(self):
         try:
             msg = Message("Jelszó váltás", sender="FusionFlare@gmail.com", recipients=[self.email])
-            msg.body = f"Kedvan {self.username} \n Ezzel a linkel tudja megváltoztatni a jelszavát: {self.link}"
+            msg.body = f"Kedves {self.username} \n Ezzel a linkel tudja megváltoztatni a jelszavát: {self.link}"
             mail.send(msg)
             return
         except Exception as error:

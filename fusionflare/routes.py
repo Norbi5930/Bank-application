@@ -51,7 +51,6 @@ def generate_card_number():
             unique_card_number = "".join([str(randint(0, 9)) for _ in range(12)])
             if not User.query.filter_by(card_number=unique_card_number).first():
                 card_number = unique_card_number
-                print(card_number)
                 break
     
     return card_number
