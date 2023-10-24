@@ -10,7 +10,7 @@ body {
     width: 800px;
     height: 600px;
     transform: translateX(calc(50% + 150px)) translateY(calc(20%));
-    border-radius: 10px;
+    border-radius: 50px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 1);
 
 }
