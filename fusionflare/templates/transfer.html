@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+
+
+
+{% block content %}
+    <h2 style="text-align: center;">Tranzakció</h2>
+
+    <form class="transfer-panel" action="" method="post">
+        {{ form.hidden_tag() }}
+
+        <div class="transfer-card-number-item">
+            {{ form.card_number(class="transfer-card-number") }}
+        </div>
+        <div class="transfer-cvc-code-item">
+            {{ form.cvc_code(class="transfer-cvc-code") }}
+        </div>
+        <div class="transfer-to-card-number-item">
+            {{ form.to_card_number(class="transfer-to-card-number") }}
+        </div>
+        <div class="transfer-money-item">
+            {{ form.money(class="transfer-money") }}
+        </div>
+        <div class="transfer-submit-item">
+            {{ form.submit(class="transfer-submit") }}
+        </div>
+    </form>
+
+
+{% endblock content %}

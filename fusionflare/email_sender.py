@@ -64,3 +64,19 @@ class PasswordChange:
             return
         except Exception as error:
             return error
+        
+class SuccesTransaction:
+    def __init__(self, username, email, to_username, to_card_number, money):
+        self.username = username
+        self.email = email
+        self.to_username = to_username
+        self.to_card_number = to_card_number
+        self.money = money
+    
+    def send_email(self):
+        try:
+            msg = Message("Sikeres tranzakció!", sender="FusionFlare@gmail.com", recipients=[self.email])
+            msg.body = f"Kedves {self.username}. \n Sikeres tranzakciót hajtott végre! \n Sikeres tranzakciót hajtott végre {self.to_username} személyel, a következő kártyaszámra: {self.to_card_number}! \n A pontos utalt összeg: {self.money}$"
+            mail.send(msg)
+        except Exception as error:
+            return error

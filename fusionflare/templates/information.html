@@ -9,7 +9,8 @@
             <p class="information-bankname">FusionFlare</p>
             <p class="information-name">{{ current_user.username }}</p>
             <p class="information-card-id">{{ card_number }}</p>
-            <p class="information-cvc-code">{{ current_user.cvc_code }}</p>
+            <p class="information-cvc-code">{{ cvc_code }}</p>
+            <p class="information-balance">{{ current_user.balance }}$</p>
         </div>
     {% endblock content %}
 </body>

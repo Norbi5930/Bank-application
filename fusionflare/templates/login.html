@@ -7,6 +7,8 @@
 
     {% block content %}
 
+        <img id="login-background" src="{{ url_for('static', filename='login-background.jpg') }}" alt="background">
+
         <form class="login-rect" action="" method="post">
             {{ form.hidden_tag() }}
             <h2 class="login-title">Bejelentkezés</h2>

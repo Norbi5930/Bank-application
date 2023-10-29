@@ -6,6 +6,8 @@
 
     {% block content %}
 
+        <img id="register-background" src="{{ url_for('static', filename='register_background.png') }}" alt="background">
+
         <form class="register-rect" action="" method="post">
             {{ form.hidden_tag() }}
             <h2 class="register-title">Regisztráció</h2>

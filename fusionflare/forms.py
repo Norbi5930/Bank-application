@@ -67,3 +67,12 @@ class PasswordChangeForm(FlaskForm):
     new_password = PasswordField(validators=[InputRequired(), Length(min=8)], render_kw={"placeholder": "Új jelszó"})
     new_password_confirm = PasswordField(validators=[InputRequired(), EqualTo("new_password")], render_kw={"placeholder": "Új jelszó megerősítés"})
     submit = SubmitField("Mentés")
+
+
+
+class TransferForm(FlaskForm):
+    card_number = StringField(validators=[InputRequired(), Length(min=12, max=15)], render_kw={"placeholder": "Kártya szám"})
+    cvc_code = PasswordField(validators=[InputRequired(), Length(min=3, max=3)], render_kw={"placeholder": "CVC"})
+    to_card_number = StringField(validators=[InputRequired(), Length(min=12, max=15)], render_kw={"placeholder": "Utalási kártyaszám"})
+    money = IntegerField(validators=[InputRequired()], render_kw={"placeholder": "Összeg"})
+    submit = SubmitField("Utalás")
