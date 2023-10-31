@@ -12,12 +12,6 @@ from fusionflare.email_sender import SuccesRegister, NewLogin, PasswordChange, S
 
 with app.app_context():
     db.create_all()
-    #hashed = bcrypt.generate_password_hash("Csipsz123").decode("utf-8")
-    #user = User(username="Norbi", card_number="123456789000", balance=50, cvc_code="000", email="bnorbert0925@gmail.com", birth_day="2009-01-26", phone_number="+380123456789", password=hashed)
-    #db.session.add(user)
-    #hashed = bcrypt.generate_password_hash("Csipsz123").decode("utf-8")
-    #user = User(username="Jancsika", card_number="123456789001", balance=50, cvc_code="000", email="bnorbert@gmail.com", birth_day="2009-02-26", phone_number="+380123456784", password=hashed)
-    #db.session.add(user)
     db.session.commit()
 
 
