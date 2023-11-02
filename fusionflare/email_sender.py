@@ -8,7 +8,7 @@ mail = Mail(app)
 
 
 
-class SuccesRegister:
+class SuccessRegister:
     def __init__(self, username, card_number, send_mail):
         self.username = username
         self.card_number = card_number
@@ -65,7 +65,7 @@ class PasswordChange:
         except Exception as error:
             return error
         
-class SuccesTransaction:
+class SuccessTransaction:
     def __init__(self, username, email, to_username, to_card_number, money):
         self.username = username
         self.email = email

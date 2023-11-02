@@ -1,5 +1,3 @@
-from collections.abc import Mapping, Sequence
-from typing import Any
 from flask_wtf import FlaskForm
 from wtforms import StringField, EmailField, PasswordField, IntegerField, SubmitField, DateField, BooleanField
 from wtforms.validators import Length, Email, EqualTo, InputRequired, ValidationError

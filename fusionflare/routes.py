@@ -5,7 +5,7 @@ from random import randint, sample
 from fusionflare import app, db, bcrypt
 from fusionflare.forms import RegisterForm, LoginForm, SecurityForm, PasswordChangeForm, TransferForm
 from fusionflare.models import User
-from fusionflare.email_sender import SuccesRegister, NewLogin, PasswordChange, SuccesTransaction
+from fusionflare.email_sender import SuccessRegister, NewLogin, PasswordChange, SuccessTransaction
 
 
 
@@ -36,8 +36,8 @@ def register():
             db.session.add(user)
             db.session.commit()
             login_user(user)
-            SuccesRegister(form.username.data, card_number, form.email.data).send_email()
-            flash("Sikeres regisztráció!", "succes")
+            SuccessRegister(form.username.data, card_number, form.email.data).send_email()
+            flash("Sikeres regisztráció!", "success")
         except:
             flash("Sikertelen regisztráció, próbáld újra később.", "danger")
 
@@ -81,7 +81,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             next_page = request.args.get("next")
-            flash("Sikeres bejelentkezés!", "succes")
+            flash("Sikeres bejelentkezés!", "success")
             NewLogin(current_user.username, current_user.email).send_email()
             return redirect(next_page) if next_page else redirect(url_for("home"))
         else:
@@ -130,7 +130,7 @@ def new_password_request():
 
         PasswordChange(current_user.username, current_user.email, f"http://localhost:5000/new_password/{link}/{current_user.user_id}").send_email()
 
-        flash("A szükséges emailt elküldtük!", "succes")
+        flash("A szükséges emailt elküldtük!", "success")
 
         return redirect(url_for("home"))
 
@@ -153,13 +153,13 @@ def new_password(link,id):
     form = PasswordChangeForm()
     user = User.query.get_or_404(id)
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() or request.method == "POST":
         if bcrypt.check_password_hash(user.password, form.old_password.data):
             hashed_password = bcrypt.generate_password_hash(form.new_password.data).decode("utf-8")
             user.password = hashed_password
             db.session.commit()
             logout_user()
-            flash("Sikeres jelszó váltás!", "succes")
+            flash("Sikeres jelszó váltás!", "success")
             return redirect(url_for("home"))
         else:
             logout_user()
@@ -188,8 +188,8 @@ def transfer():
                     current_user.balance -= form.money.data
                     user.balance += form.money.data
                     db.session.commit()
-                    SuccesTransaction(current_user.username, current_user.email, user.username, user.card_number, form.money.data).send_email()
-                    flash("Sikeres tranzakció, a részleteket továbbitottuk az e-mail címére!", "succes")
+                    SuccessTransaction(current_user.username, current_user.email, user.username, user.card_number, form.money.data).send_email()
+                    flash("Sikeres tranzakció, a részleteket továbbitottuk az e-mail címére!", "success")
                     return redirect(url_for("home"))
             else:
                 flash("Nem létezik a megadott kártyaszám!", "danger")
@@ -215,5 +215,5 @@ def privacy():
 @login_required
 def logout():
     logout_user()
-    flash("Sikeres kijelentkezés!", "succes")
+    flash("Sikeres kijelentkezés!", "successs")
     return redirect(url_for("home"))
