@@ -6,6 +6,7 @@
 
     {% block content %}
         <div class="information-card">
+            <img id="card_chip" src="{{ url_for('static', filename='card_chip.png') }}" alt="card_chip">
             <p class="information-bankname">FusionFlare</p>
             <p class="information-name">{{ current_user.username }}</p>
             <p class="information-card-id">{{ card_number }}</p>

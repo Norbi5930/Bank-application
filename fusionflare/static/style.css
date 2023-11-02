@@ -277,6 +277,13 @@ body {
 }
 
 
+#card_chip {
+    position: absolute;
+    left: 10%;
+    top: 10%;
+}
+
+
 .information-bankname {
     position: absolute;
     font-size: 34px;
