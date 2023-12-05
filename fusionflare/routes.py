@@ -32,7 +32,7 @@ def register():
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
             card_number = generate_card_number()
             cvc_code = generate_cvc_code()
-            user = User(username=form.username.data, card_number=card_number, balance=50, cvc_code=cvc_code, email=form.email.data, birth_day=form.birth_data.data, phone_number=form.phone_number.data, password=hashed_password)
+            user = User(username=form.username.data, card_number=card_number, balance=500, cvc_code=cvc_code, email=form.email.data, birth_day=form.birth_data.data, phone_number=form.phone_number.data, password=hashed_password)
             db.session.add(user)
             db.session.commit()
             login_user(user)
