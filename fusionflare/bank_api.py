@@ -24,10 +24,10 @@ class BankAPI(Resource):
                 if user.balance >= money:
                     user.balance -= money
                     db.session.commit()
-                    return {"success": True, 'message': 'Sikeres feltöltés', 'new_balance': user.balance}
+                    return {"success": True, "message": "Sikeres feltöltés", "new_balance": user.balance}
                 else:
                     return {"success": False, "error": "Nincs elegendő pénz a számládon!"}
             except ValueError:
-                return {"success": False, 'error': 'Érvénytelen összeg formátum'}
+                return {"success": False, "error": "Érvénytelen összeg formátum"}
         else:
-            return {"success": False, 'error': 'Felhasználó nem található'}, 404
+            return {"success": False, "error": "Felhasználó nem található"}, 404
