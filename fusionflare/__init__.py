@@ -21,5 +21,6 @@ login_manager.login_view = "login"
 
 from fusionflare import routes
 
-from fusionflare.bank_api import BankAPI
-api.add_resource(BankAPI, '/api/bank/<int:card_number>')
+from fusionflare.bank_api import BankAPIDeposit, BankAPIWithdraw
+api.add_resource(BankAPIDeposit, "/api/bank/deposit/<int:card_number>")
+api.add_resource(BankAPIWithdraw, "/api/bank/withdraw/<int:card_number>")

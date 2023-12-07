@@ -5,7 +5,7 @@ from fusionflare import db
 
 
 
-class BankAPI(Resource):
+class BankAPIDeposit(Resource):
     def get(self, card_number):
         user = User.query.filter_by(card_number=card_number).first()
 
@@ -31,3 +31,29 @@ class BankAPI(Resource):
                 return {"success": False, "error": "Érvénytelen összeg formátum"}
         else:
             return {"success": False, "error": "Felhasználó nem található"}, 404
+        
+
+
+class BankAPIWithdraw(Resource):
+    def get(self, card_number):
+        user = User.query.filter_by(card_number=card_number).first()
+
+        if user:
+            return {"success": True, "balance": user.balance}
+        else:
+            return {"error": "A megadott kártyaszám nem érvényes!"}, 404
+    
+
+    def post(self, card_number):
+        user = User.query.filter_by(card_number=card_number).first()
+        cvc_code = int(request.form.get("cvc_code"))
+        if user and user.cvc_code == cvc_code:
+            try:
+                money = int(request.form.get("money"))
+                user.balance += money
+                db.session.commit()
+                return {"success": True, "message": "Sikeres tranzakció!"}
+            except ValueError:
+                return {"success": False, "error": "Sikertelen tranzakció!"}
+        else:
+            return {"success": False, "error": "Felhasználó nem található!"}, 404
